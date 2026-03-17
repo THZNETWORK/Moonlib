@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CENTRO THZ SITES</title>
-    <link rel="icon" href="1000026426.jpg" type="image/jpeg">
-
     <style>
         body {
             font-family: 'Segoe UI', Arial, sans-serif;
@@ -58,6 +56,28 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             cursor: pointer;
+            position: relative;
+            overflow: hidden; /* Necessário para o efeito de brilho */
+        }
+
+        /* EFEITO DE BRILHO PASSANDO NO BOTÃO */
+        .link-item::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -60%;
+            width: 20%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(30deg);
+            transition: none;
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { left: -60%; }
+            20% { left: 120%; }
+            100% { left: 120%; }
         }
 
         .link-item:hover {
@@ -66,13 +86,13 @@
             color: #00e5ff;
         }
 
-        /* --- MODAL PERSONALIZADO (AVISO) --- */
+        /* --- MODAL AJUSTADO (TEXTO CLARO) --- */
         .modal {
             display: none;
             position: fixed;
             z-index: 100;
             left: 0; top: 0; width: 100%; height: 100%;
-            background-color: rgba(0,0,0,0.8);
+            background-color: rgba(0,0,0,0.85);
             align-items: center;
             justify-content: center;
         }
@@ -84,29 +104,31 @@
             border: 2px solid #bf953f;
             text-align: center;
             max-width: 280px;
-            color: #fcf6ba;
-            box-shadow: 0 0 20px rgba(191, 149, 63, 0.5);
+            color: #fff; /* Texto agora fica branco puro para ler bem */
+            box-shadow: 0 0 25px rgba(191, 149, 63, 0.6);
         }
 
-        .modal-content h2 { margin-top: 0; font-size: 1.2rem; }
+        .modal-content p { color: #fcf6ba; margin-top: 15px; } /* Texto interno dourado claro */
+
         .close-btn {
             margin-top: 20px;
             background-color: #bf953f;
             color: #000;
             border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
+            padding: 12px 25px;
+            border-radius: 8px;
             font-weight: bold;
             cursor: pointer;
+            text-transform: uppercase;
         }
 
         /* --- GLITTER --- */
         .glitter-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
         .dot { position: absolute; width: 6px; height: 6px; background-color: #00e5ff; border-radius: 50%; box-shadow: 0 0 10px #00e5ff; bottom: -10px; animation: moveUp 4s linear infinite; }
         .dot:nth-child(1) { left: 10%; animation-delay: 0s; }
-        .dot:nth-child(2) { left: 35%; animation-delay: 1.5s; }
-        .dot:nth-child(3) { left: 60%; animation-delay: 0.5s; }
-        .dot:nth-child(4) { left: 85%; animation-delay: 2.5s; }
+        .dot:nth-child(2) { left: 40%; animation-delay: 1.5s; width: 4px; }
+        .dot:nth-child(3) { left: 70%; animation-delay: 0.5s; }
+        .dot:nth-child(4) { left: 90%; animation-delay: 2.5s; width: 5px; }
 
         @keyframes moveUp { 0% { transform: translateY(0); opacity: 1; } 100% { transform: translateY(-110vh); opacity: 0; } }
     </style>
@@ -119,24 +141,22 @@
 
     <div id="avisoModal" class="modal">
         <div class="modal-content">
-            <h2>⚠️ AVISO</h2>
-            <p>O conteúdo **FF SENSE** está sendo preparado e estará disponível em breve!</p>
+            <h2 style="color:#bf953f; margin:0;">⚠️ AVISO</h2>
+            <p>O conteúdo <strong>FF SENSE</strong> está sendo preparado e estará disponível em breve!</p>
             <button class="close-btn" onclick="fecharModal()">ENTENDIDO</button>
         </div>
     </div>
 
-    <img src="1000026426.jpg" class="profile-pic" alt="Perfil">
+    <img src="https://i.ibb.co/LhYxS6X/feitan.jpg" class="profile-pic" alt="Perfil">
 
     <h1>CENTRO THZ SITES</h1>
     <p>Acesse nossos canais oficiais 👇</p>
 
     <div class="links-container">
-        <a href="#" class="link-item">NOSSOS SITES</a>
-        <a href="#" class="link-item">INSTAGRAM OFICIAL</a>
-        
+        <a href="https://seu-link-aqui.com" class="link-item">NOSSOS SITES</a>
+        <a href="https://instagram.com/seu_perfil" class="link-item">INSTAGRAM OFICIAL</a>
         <div class="link-item" onclick="abrirModal()">FF SENSE (Em andamento)</div>
-        
-        <a href="#" class="link-item">SUPORTE WHATSAPP</a>
+        <a href="https://wa.me/seu_numero" class="link-item">SUPORTE WHATSAPP</a>
     </div>
 
     <script>
