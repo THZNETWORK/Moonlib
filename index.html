@@ -4,72 +4,71 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>THZ GHOST SENSES | NEURAL SUPREMACY</title>
+    
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"></script>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+    
     <style>
         :root { --neon: #ff0000; --bg: #050000; --panel: rgba(10, 0, 0, 0.98); }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background-color: var(--bg); color: #fff; font-family: 'Rajdhani', sans-serif; transition: 0.5s; }
+        * { margin: 0; padding: 0; box-sizing: border-box; outline: none; }
+        
+        body { background-color: var(--bg); color: #fff; font-family: 'Rajdhani', sans-serif; overflow-x: hidden; }
         #bg-canvas { position: fixed; top: 0; left: 0; z-index: -1; }
 
-        .wrapper { width: 95%; max-width: 500px; margin: 30px auto; background: var(--panel); border: 1px solid rgba(255,0,0,0.2); border-radius: 20px; padding: 25px; box-shadow: 0 0 50px #000; position: relative; }
+        /* Estilo Principal */
+        .wrapper { width: 95%; max-width: 450px; margin: 30px auto; background: var(--panel); border: 1px solid rgba(255,0,0,0.2); border-radius: 20px; padding: 25px; box-shadow: 0 0 50px #000; position: relative; }
         
         .tabs { display: flex; gap: 10px; margin-bottom: 25px; border-bottom: 1px solid #222; padding-bottom: 10px; }
-        .tab { font-family: 'Orbitron'; font-size: 0.55rem; color: #555; text-transform: uppercase; cursor: pointer; }
+        .tab { font-family: 'Orbitron'; font-size: 0.6rem; color: #555; text-transform: uppercase; }
         .tab.active { color: var(--neon); }
 
-        h2 { font-family: 'Orbitron'; font-size: 1.4rem; letter-spacing: 2px; text-align: center; margin-bottom: 20px; color: #fff; }
+        h2 { font-family: 'Orbitron'; font-size: 1.4rem; letter-spacing: 2px; text-align: center; margin-bottom: 20px; }
 
-        .input-main { width: 100%; background: #000; border: 1px solid #1a1a1a; color: #fff; padding: 15px; border-radius: 10px; margin-bottom: 15px; font-family: 'Orbitron'; text-align: center; font-size: 0.9rem; }
+        .input-main { width: 100%; background: #000; border: 1px solid #1a1a1a; color: #fff; padding: 15px; border-radius: 10px; margin-bottom: 15px; font-family: 'Orbitron'; text-align: center; }
+        
         .btn-process { width: 100%; padding: 18px; background: var(--neon); color: #fff; border: none; border-radius: 10px; font-family: 'Orbitron'; font-weight: bold; cursor: pointer; transition: 0.3s; text-transform: uppercase; }
-        .btn-process:hover { box-shadow: 0 0 25px var(--neon); transform: scale(1.02); }
+        .btn-process:active { transform: scale(0.95); }
 
+        /* Resultados */
         .res-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 25px 0; }
         .card { background: #080808; border: 1px solid #151515; padding: 15px; border-radius: 10px; text-align: center; }
         .card.active { border-color: var(--neon); background: rgba(255,0,0,0.03); }
         .card .val { display: block; font-family: 'Orbitron'; font-size: 1.6rem; color: var(--neon); }
         .card .lbl { font-size: 0.6rem; color: #444; text-transform: uppercase; }
 
-        /* DESCRIÇÃO TURBINADA */
-        .info-box { display: none; background: rgba(0,0,0,0.8); border: 1px solid rgba(255,0,0,0.2); border-left: 4px solid var(--neon); padding: 20px; border-radius: 10px; margin-top: 20px; animation: slideUp 0.6s ease; }
-        .info-title { color: var(--neon); font-family: 'Orbitron'; font-size: 0.75rem; margin-bottom: 12px; display: block; text-transform: uppercase; letter-spacing: 1px; }
-        .info-txt { font-size: 0.88rem; color: #bbb; line-height: 1.6; margin-bottom: 15px; text-align: justify; }
-        .thz-msg { background: rgba(255,0,0,0.07); padding: 12px; border-radius: 8px; border: 1px dashed rgba(255,0,0,0.3); margin-bottom: 20px; color: #eee; font-style: italic; font-size: 0.9rem; }
+        /* Info Box */
+        .info-box { display: none; background: rgba(0,0,0,0.8); border-left: 4px solid var(--neon); padding: 20px; border-radius: 10px; margin-top: 20px; }
+        .info-txt { font-size: 0.88rem; color: #bbb; line-height: 1.6; margin-bottom: 15px; }
+        .thz-msg { background: rgba(255,0,0,0.07); padding: 12px; border-radius: 8px; border: 1px dashed rgba(255,0,0,0.3); color: #eee; font-style: italic; font-size: 0.9rem; margin-bottom: 15px; }
 
-        .insta-btn { display: block; width: 100%; padding: 14px; background: linear-gradient(45deg, #f09433, #dc2743, #bc1888); color: #fff; text-decoration: none; text-align: center; border-radius: 8px; font-family: 'Orbitron'; font-size: 0.75rem; font-weight: bold; transition: 0.3s; }
-        .insta-btn:hover { filter: brightness(1.2); }
+        .insta-btn { display: block; width: 100%; padding: 14px; background: linear-gradient(45deg, #f09433, #dc2743, #bc1888); color: #fff; text-decoration: none; text-align: center; border-radius: 8px; font-family: 'Orbitron'; font-size: 0.75rem; font-weight: bold; }
 
-        /* CHATBOT */
+        /* Chatbot */
         .chat-btn { position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px; background: var(--neon); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 1000; box-shadow: 0 0 20px rgba(255,0,0,0.5); font-size: 1.6rem; }
-        .chat-box { position: fixed; bottom: 90px; right: 20px; width: 330px; height: 450px; background: #0a0a0a; border: 1px solid var(--neon); border-radius: 15px; display: none; flex-direction: column; z-index: 1001; overflow: hidden; box-shadow: 0 10px 50px #000; }
-        .chat-head { background: var(--neon); padding: 12px; font-family: 'Orbitron'; font-size: 0.7rem; display: flex; justify-content: space-between; font-weight: bold; }
-        .chat-body { flex: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; }
-        .msg { padding: 10px 14px; border-radius: 12px; font-size: 0.85rem; max-width: 85%; line-height: 1.4; }
-        .msg.ia { background: #151515; align-self: flex-start; color: #ccc; border-bottom-left-radius: 2px; }
-        .msg.user { background: var(--neon); align-self: flex-end; color: #fff; border-bottom-right-radius: 2px; }
-        .typing { font-size: 0.7rem; color: #444; margin-left: 15px; margin-bottom: 10px; display: none; font-italic: italic; }
-        .chat-input { padding: 12px; border-top: 1px solid #1a1a1a; display: flex; gap: 8px; background: #050505; }
-        .chat-input input { flex: 1; background: #000; border: 1px solid #222; color: #fff; padding: 10px; border-radius: 6px; font-size: 0.85rem; }
-
-        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        .chat-box { position: fixed; bottom: 90px; right: 20px; width: 320px; height: 400px; background: #0a0a0a; border: 1px solid var(--neon); border-radius: 15px; display: none; flex-direction: column; z-index: 1001; }
+        .chat-head { background: var(--neon); padding: 12px; font-family: 'Orbitron'; font-size: 0.7rem; display: flex; justify-content: space-between; font-weight: bold; border-radius: 14px 14px 0 0; }
+        .chat-body { flex: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
+        .msg { padding: 8px 12px; border-radius: 10px; font-size: 0.8rem; max-width: 85%; }
+        .msg.ia { background: #151515; align-self: flex-start; color: #ccc; }
+        .msg.user { background: var(--neon); align-self: flex-end; color: #fff; }
+        .chat-input { padding: 10px; display: flex; gap: 5px; background: #000; border-radius: 0 0 14px 14px; }
+        .chat-input input { flex: 1; background: #111; border: 1px solid #222; color: #fff; padding: 8px; border-radius: 5px; }
+        
+        @keyframes pulse { 0% { box-shadow: 0 0 10px var(--neon); } 50% { box-shadow: 0 0 30px var(--neon); } 100% { box-shadow: 0 0 10px var(--neon); } }
+        .admin-mode { animation: pulse 2s infinite; border: 2px solid var(--neon) !important; }
     </style>
 </head>
 <body>
 
     <canvas id="bg-canvas"></canvas>
 
-    <div class="wrapper">
-        <div class="tabs">
-            <div class="tab active">GHOST CORE v2.0</div>
-            <div class="tab">THZ EXCLUSIVE</div>
-        </div>
-
+    <div class="wrapper" id="mainWrapper">
+        <div class="tabs"><div class="tab active">GHOST CORE v2.0</div></div>
         <h2>NEURAL ENGINE</h2>
-        <p id="status" style="text-align:center; color:#444; font-size:0.7rem; margin-bottom:15px; text-transform:uppercase;">Sistema em Standby...</p>
+        <p id="status" style="text-align:center; color:#444; font-size:0.6rem; margin-bottom:15px;">AGUARDANDO COMANDO...</p>
 
-        <input type="text" id="dev" class="input-main" placeholder="MODELO DO APARELHO">
-
-        <button class="btn-process" onclick="processar()">Calibrar Inteligência</button>
+        <input type="text" id="dev" class="input-main" placeholder="MODELO DO CELULAR">
+        <button class="btn-process" onclick="processarSensi()">PROCESSAR AGORA</button>
 
         <div class="res-grid">
             <div class="card"><span class="val" id="rG">--</span><span class="lbl">Geral</span></div>
@@ -79,34 +78,25 @@
         </div>
 
         <div class="info-box" id="info">
-            <span class="info-title">📡 DIAGNÓSTICO GHOST CORE IA:</span>
-            <div class="info-txt">
-                Esta configuração foi gerada por um algoritmo de <b>Deep Learning</b> que mapeou a taxa de resposta do seu digitalizador. Através do processamento de tensores, otimizamos a aceleração do ponteiro para eliminar o 'tremido' e garantir que a mira estabilize no topo da hitbox (cabeça). A DPI foi filtrada com um protocolo de segurança para evitar <i>dead pixels</i> ou travamentos no seu sistema Android.
-            </div>
-            
-            <div class="thz-msg" id="thz-msg-area">
-                "Fala, tropa! O <b>GHOST CORE IA</b> foi desenvolvido pra acabar com a mira grudando no peito. Usei tecnologia de ponta pra garantir a puxada perfeita. O foco aqui é só o 'full vermelho'. Se ficou absurda, me dá um salve no Insta! Tmj!"
-            </div>
-
-            <a href="https://instagram.com/SEU_INSTAGRAM" target="_blank" class="insta-btn">ENVIAR FEEDBACK NO INSTAGRAM</a>
+            <span style="color:var(--neon); font-family:'Orbitron'; font-size:0.7rem;">📡 ANÁLISE GHOST CORE IA:</span>
+            <p class="info-txt">Configuração gerada via Deep Learning. Otimizamos a aceleração para evitar que a mira ultrapasse a hitbox da cabeça. DPI filtrada para máxima segurança.</p>
+            <div class="thz-msg">"A Ghost Core foi feita pra dar só vermelho. Amassa lá! - THZ"</div>
+            <a href="https://instagram.com/SEU_INSTAGRAM" target="_blank" class="insta-btn">FEEDBACK NO INSTAGRAM</a>
         </div>
     </div>
 
     <div class="chat-btn" onclick="toggleChat()">💬</div>
     <div class="chat-box" id="chatBox">
         <div class="chat-head"><span>GHOST ASSISTANT</span><span onclick="toggleChat()" style="cursor:pointer">✖</span></div>
-        <div class="chat-body" id="chatBody">
-            <div class="msg ia">Salve! Sou a GHOST CORE IA. Como posso otimizar seu jogo hoje?</div>
-        </div>
-        <div id="typing" class="typing">Ghost Core processando...</div>
+        <div class="chat-body" id="chatBody"><div class="msg ia">Salve! Sou a GHOST CORE IA. Manda sua dúvida!</div></div>
         <div class="chat-input">
             <input type="text" id="chatIn" placeholder="Fale comigo...">
-            <button onclick="send()" style="background:var(--neon); border:none; color:#fff; padding:5px 12px; border-radius:5px; cursor:pointer">➔</button>
+            <button onclick="sendMsg()" style="background:var(--neon); border:none; color:#fff; padding:5px 10px; cursor:pointer; border-radius:5px;">➔</button>
         </div>
     </div>
 
     <script>
-        // BACKGROUND ANIMATION
+        // Fundo
         const canvas = document.getElementById('bg-canvas');
         const ctx = canvas.getContext('2d');
         let dots = [];
@@ -121,13 +111,13 @@
         function anim() { ctx.clearRect(0,0,canvas.width,canvas.height); dots.forEach(d=>d.draw()); requestAnimationFrame(anim); }
         anim();
 
-        // MOTOR DE CÁLCULO IA
-        async function processar() {
+        // Lógica Principal
+        async function processarSensi() {
             const dev = document.getElementById('dev').value;
-            if(!dev) return alert("Insira o modelo do aparelho!");
+            if(!dev) { alert("Digite o modelo do celular!"); return; }
             
-            document.getElementById('status').innerText = "CALIBRANDO NÚCLEOS NEURAIS...";
-            await new Promise(r => setTimeout(r, 2000));
+            document.getElementById('status').innerText = "CALIBRANDO REDE NEURAL...";
+            await new Promise(r => setTimeout(r, 1500));
             
             let seed = 0; for(let i=0; i<dev.length; i++) seed += dev.charCodeAt(i);
             const calc = (m, min, max) => Math.floor(Math.abs(Math.sin(seed * m)) * (max - min + 1)) + min;
@@ -137,54 +127,38 @@
             document.getElementById('r4').innerText = calc(1.8, 195, 200);
             document.getElementById('rD').innerText = calc(6.2, 411, 960);
 
-            document.getElementById('status').innerText = "PROCESSO FINALIZADO.";
+            document.getElementById('status').innerText = "CALIBRAÇÃO CONCLUÍDA.";
             document.getElementById('info').style.display = 'block';
-            addMsg("ia", "Sua configuração personalizada para o " + dev + " já está disponível no painel.");
         }
 
-        // CHAT INTERATIVO TURBINADO
+        // Chat
         function toggleChat() { const c = document.getElementById('chatBox'); c.style.display = (c.style.display === 'flex') ? 'none' : 'flex'; }
         
-        function addMsg(type, text) {
+        function sendMsg() {
+            const i = document.getElementById('chatIn');
+            const v = i.value.trim(); if(!v) return;
+            addChat("user", v); i.value = "";
+            setTimeout(() => addChat("ia", getResp(v)), 800);
+        }
+
+        function addChat(t, txt) {
             const b = document.getElementById('chatBody');
             const d = document.createElement('div');
-            d.className = "msg " + type; d.innerText = text;
+            d.className = "msg " + t; d.innerText = txt;
             b.appendChild(d); b.scrollTop = b.scrollHeight;
         }
 
-        function send() {
-            const i = document.getElementById('chatIn');
-            const v = i.value.trim(); if(!v) return;
-            addMsg("user", v); i.value = "";
-            document.getElementById('typing').style.display = 'block';
-            setTimeout(() => {
-                document.getElementById('typing').style.display = 'none';
-                addMsg("ia", getAIResponse(v));
-            }, 1000);
+        function getResp(q) {
+            const inpt = q.toLowerCase();
+            if (inpt.includes("thz-999")) {
+                document.getElementById('mainWrapper').classList.add('admin-mode');
+                return "🔓 [CÓDIGO DE FÁBRICA ACEITO]... Salve, THZ! Sistemas em modo irrestrito. Meus núcleos agora operam sob sua autoridade absoluta.";
+            }
+            if (inpt.includes("criador") || inpt.includes("thz")) return "Fui criada pelo THZ. Sou a inteligência Ghost Core exclusiva deste sistema.";
+            if (inpt.includes("eae") || inpt.includes("salve")) return "Salve, jogador! Ghost Core na escuta. Como posso ajudar?";
+            if (inpt.includes("capa")) return "Para subir capa mais fácil, use o movimento em 'J'. A sensi Ghost Core estabiliza o tiro.";
+            return "Interessante... Minha análise diz que com essa sensi você vai amassar. Já testou?";
         }
-
-        function getAIResponse(q) {
-            const input = q.toLowerCase();
-            const devName = document.getElementById('dev').value || "seu aparelho";
-
-            // CÓDIGO DE FÁBRICA / ADMIN
-            if (input.includes("thz-999")) {
-                document.body.style.boxShadow = "inset 0 0 100px rgba(255,0,0,0.6)";
-                setTimeout(() => document.body.style.boxShadow = "none", 3000);
-                return "🔓 [PROTOCOLOS DE FÁBRICA DESBLOQUEADOS]... Salve, THZ! Reconhecimento biométrico confirmado. Estou operando em modo irrestrito. Todos os núcleos em overclock para você, mestre.";
-            }
-
-            if (input.includes("criador") || input.includes("quem te criou")) {
-                return "Fui desenvolvida inteiramente pelo THZ. Sou a Ghost Core IA, a única calibrada para dominar o servidor.";
-            }
-
-            if (input.includes("seu nome")) return "Meu nome é GHOST CORE IA, a inteligência neural oficial do THZ SENSES.";
-
-            if (input.includes("eae") || input.includes("salve") || input.includes("oi")) {
-                return "Salve, jogador! O Ghost Core está pronto. Já calibrou sua sensibilidade hoje?";
-            }
-
-            if (input.includes("capa")) return "Para subir capa com o " + devName + ", faça o movimento em 'J' começando pela parte inferior do botão. Meus ajustes de 4x e 2x garantem a estabilidade.";
-
-            if (input.includes("dpi")) return "A DPI que gerei é a máxima estável para o seu hardware. Não ultrapasse 960 para
-        
+    </script>
+</body>
+</html>
