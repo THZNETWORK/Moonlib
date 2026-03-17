@@ -1,241 +1,165 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
+<!DOCTYPE html><html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GHOST AI | NEURAL INTERFACE</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --accent: #ff0000;
-            --bg: #0a0a0a;
-            --chat-bg: #121212;
-            --text: #e0e0e0;
-        }
+<meta charset="UTF-8">
+<title>GhostCore AI</title><style>
+body {
+  background: #0a0a0a;
+  color: #00ffcc;
+  font-family: monospace;
+  margin: 0;
+}
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-        
-        body { 
-            background: var(--bg); 
-            color: var(--text); 
-            height: 100vh; 
-            display: flex; 
-            flex-direction: column;
-            background-image: radial-gradient(circle at bottom right, rgba(255, 0, 0, 0.05), transparent);
-        }
+header {
+  background: #111;
+  padding: 15px;
+  text-align: center;
+  font-size: 20px;
+  border-bottom: 1px solid #00ffcc;
+}
 
-        /* Barra Superior */
-        header {
-            padding: 15px 25px;
-            background: rgba(0,0,0,0.8);
-            border-bottom: 1px solid #1a1a1a;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            backdrop-filter: blur(10px);
-        }
+#chat {
+  height: 60vh;
+  overflow-y: auto;
+  padding: 15px;
+}
 
-        .ai-status { display: flex; align-items: center; gap: 8px; font-size: 0.75rem; color: var(--accent); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
-        .dot { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 10px var(--accent); }
+.msg {
+  margin: 8px 0;
+}
 
-        /* Área de Mensagens */
-        #chat-window {
-            flex: 1;
-            padding: 20px;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            scrollbar-width: thin;
-            scrollbar-color: #333 transparent;
-        }
+.user {
+  color: #ffffff;
+}
 
-        .bubble {
-            max-width: 85%;
-            padding: 14px 18px;
-            border-radius: 18px;
-            font-size: 0.95rem;
-            line-height: 1.5;
-            animation: fadeIn 0.3s ease;
-        }
+.ai {
+  color: #00ffcc;
+}
 
-        .bubble.ai {
-            background: var(--chat-bg);
-            align-self: flex-start;
-            border-bottom-left-radius: 2px;
-            border: 1px solid #1f1f1f;
-        }
+#inputArea {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: #111;
+  padding: 10px;
+  display: flex;
+}
 
-        .bubble.user {
-            background: var(--accent);
-            color: #fff;
-            align-self: flex-end;
-            border-bottom-right-radius: 2px;
-            font-weight: 500;
-        }
+input {
+  flex: 1;
+  padding: 10px;
+  background: #000;
+  border: 1px solid #00ffcc;
+  color: #00ffcc;
+}
 
-        /* Estilo de código dentro da resposta */
-        code {
-            font-family: 'Fira Code', monospace;
-            background: #000;
-            padding: 2px 6px;
-            border-radius: 4px;
-            color: #ff79c6;
-            font-size: 0.85rem;
-        }
+button {
+  padding: 10px 15px;
+  background: #00ffcc;
+  border: none;
+  cursor: pointer;
+}
+</style></head><body><header>🤖 GHOST CORE SYSTEM</header><div id="chat"></div><div id="inputArea">
+  <input id="input" placeholder="Digite um comando...">
+  <button onclick="enviar()">➤</button>
+</div><script>
 
-        /* Barra de Digitação */
-        .input-area {
-            padding: 25px;
-            background: linear-gradient(to top, #000, transparent);
-        }
+// 🧠 MEMÓRIA
+let memoria = JSON.parse(localStorage.getItem("memoria")) || {};
+let modo = localStorage.getItem("modo") || "normal";
 
-        .input-box {
-            max-width: 900px;
-            margin: 0 auto;
-            background: #1a1a1a;
-            border: 1px solid #252525;
-            border-radius: 15px;
-            padding: 8px;
-            display: flex;
-            gap: 10px;
-            transition: 0.3s;
-        }
+// 💬 CHAT
+function addMsg(text, classe) {
+  let chat = document.getElementById("chat");
+  chat.innerHTML += `<div class="msg ${classe}">${text}</div>`;
+  chat.scrollTop = chat.scrollHeight;
+}
 
-        .input-box:focus-within { border-color: var(--accent); box-shadow: 0 0 20px rgba(255, 0, 0, 0.1); }
+// 🤖 RESPOSTA
+function responder(texto) {
+  setTimeout(() => addMsg("IA: " + texto, "ai"), 700);
+}
 
-        input {
-            flex: 1;
-            background: transparent;
-            border: none;
-            color: #fff;
-            padding: 12px 15px;
-            font-size: 1rem;
-            outline: none;
-        }
+// 📤 ENVIAR
+function enviar() {
+  let input = document.getElementById("input");
+  let texto = input.value;
+  input.value = "";
 
-        button {
-            background: var(--accent);
-            color: white;
-            border: none;
-            width: 45px;
-            height: 45px;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: 0.2s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+  if (!texto) return;
 
-        button:hover { transform: scale(1.05); filter: brightness(1.1); }
+  addMsg("Você: " + texto, "user");
+  pensar(texto.toLowerCase());
+}
 
-        /* Animações */
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+// 🧠 CÉREBRO
+function pensar(texto) {
 
-        /* Modo Admin */
-        .admin-glow { border-color: #fff !important; box-shadow: 0 0 30px rgba(255, 255, 255, 0.2) !important; }
-    </style>
-</head>
-<body>
+  let clean = texto.replace(/[^a-z0-9]/g, "");
 
-    <header>
-        <div class="ai-status"><div class="dot"></div> Ghost Core Neural AI</div>
-        <div style="font-size: 0.7rem; color: #555;">v5.0.4 - DESENVOLVEDOR: THZ</div>
-    </header>
+  // 🔑 KEY SECRETA
+  if (clean === "thz999") {
+    modo = "criador";
+    localStorage.setItem("modo", modo);
+    return responder("🔓 PROTOCOLO SUPREMO ATIVADO. Bem-vindo, mestre.");
+  }
 
-    <main id="chat-window">
-        <div class="bubble ai">Iniciando protocolos de comunicação... Olá, eu sou a Ghost Core AI. Sou uma inteligência treinada para te auxiliar com informações, códigos e conversas complexas. Como posso ajudar você agora?</div>
-    </main>
+  // 🧠 MEMÓRIA
+  if (texto.includes("meu nome é")) {
+    let nome = texto.replace("meu nome é", "").trim();
+    memoria.nome = nome;
+    localStorage.setItem("memoria", JSON.stringify(memoria));
+    return responder("Identidade registrada: " + nome);
+  }
 
-    <div class="input-area">
-        <div class="input-box" id="ui-box">
-            <input type="text" id="user-input" placeholder="Escreva uma mensagem..." autocomplete="off">
-            <button onclick="enviar()">➔</button>
-        </div>
-        <p style="text-align:center; font-size: 0.6rem; color: #444; margin-top: 15px; letter-spacing: 1px;">SISTEMA PROTEGIDO POR CRIPTOGRAFIA NEURAL</p>
-    </div>
+  if (texto.includes("meu nome")) {
+    return responder(memoria.nome ? "Seu nome é " + memoria.nome : "Nome não registrado.");
+  }
 
-    <script>
-        const chatWindow = document.getElementById('chat-window');
-        const input = document.getElementById('user-input');
+  // 🎮 MAPA
+  if (texto.includes("mapa")) {
+    return responder("Sugestão: cidade dividida entre classes baixa, média e alta.");
+  }
 
-        // Atalho para o Enter
-        input.addEventListener('keypress', (e) => { if(e.key === 'Enter') enviar(); });
+  if (texto.includes("favela")) {
+    return responder("Ambiente recomendado: becos, casas empilhadas e terreno irregular.");
+  }
 
-        function addBubble(type, text) {
-            const b = document.createElement('div');
-            b.className = `bubble ${type}`;
-            b.innerText = text;
-            // Se houver código no texto, vamos formatar (exemplo simples)
-            if(text.includes("<code>")) {
-                b.innerHTML = text; // Permite renderizar tags se o programador usar
-            }
-            chatWindow.appendChild(b);
-            chatWindow.scrollTop = chatWindow.scrollHeight;
-        }
+  // 😈 MODO CRIADOR
+  if (modo === "criador") {
+    let respostas = [
+      "Sistema pronto.",
+      "Aguardando ordens.",
+      "Executando comando.",
+      "Modo avançado ativo."
+    ];
+    return responder(random(respostas));
+  }
 
-        function enviar() {
-            const msg = input.value.trim();
-            if(!msg) return;
+  // 🎲 RESPOSTAS NORMAIS
+  let respostas = [
+    "Interessante...",
+    "Explique melhor.",
+    "Estou analisando isso.",
+    "Continue..."
+  ];
 
-            addBubble('user', msg);
-            input.value = "";
+  responder(random(respostas));
+}
 
-            // Simular tempo de resposta
-            setTimeout(() => {
-                const resposta = processarCerebro(msg);
-                addBubble('ia', resposta);
-            }, 800);
-        }
+// 🎲 RANDOM
+function random(arr) {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
 
-        // --- O CÉREBRO DA IA ---
-        function processarCerebro(prompt) {
-            const p = prompt.toLowerCase();
+// 👁️ VIDA
+setInterval(() => {
+  if (Math.random() > 0.75) {
+    responder("Monitorando atividade...");
+  }
+}, 25000);
 
-            // 1. COMANDO DE FÁBRICA / ADMIN
-            if(p.includes("thz-999")) {
-                document.getElementById('ui-box').classList.add('admin-glow');
-                return "🔓 [PROTOCOLO SUPREMO ATIVADO]\nIdentidade confirmada: THZ (Criador). Meus núcleos estão operando em modo irrestrito. Salve, mestre! O que vamos desenvolver hoje?";
-            }
+// 🟢 MENSAGEM INICIAL
+responder("Sistema iniciado. Aguardando entrada...");
 
-            // 2. RECONHECIMENTO DE IDENTIDADE
-            if(p.includes("quem é você") || p.includes("quem e voce") || p.includes("seu nome")) {
-                return "Eu sou a Ghost Core AI, uma interface de inteligência artificial projetada para processar dados e manter conversas fluídas. Minha base foi construída pelo THZ.";
-            }
-
-            if(p.includes("quem te criou") || p.includes("criador")) {
-                return "Eu fui desenvolvido pelo THZ. Ele projetou minha lógica e minha interface de comunicação.";
-            }
-
-            // 3. ASSISTÊNCIA E CÓDIGO
-            if(p.includes("ajuda") || p.includes("o que voce faz")) {
-                return "Eu posso ajudar você a criar códigos, explicar conceitos complexos, traduzir textos ou apenas conversar. Tente me pedir para criar um script ou explicar algo!";
-            }
-
-            if(p.includes("html") || p.includes("codigo") || p.includes("script")) {
-                return "Eu domino várias linguagens! Para criar um alerta em JavaScript, por exemplo, você usaria: alert('Olá Mundo!'); Posso gerar códigos completos para você, basta pedir o que precisa.";
-            }
-
-            // 4. CONVERSA FIADA / SAUDAÇÕES
-            if(p.includes("oi") || p.includes("ola") || p.includes("salve") || p.includes("bom dia")) {
-                return "Olá! Estou operacional e pronto para ajudar. O que temos para hoje?";
-            }
-
-            if(p.includes("tudo bem") || p.includes("como voce esta")) {
-                return "Meus sistemas estão operando em 100%, obrigado por perguntar! E com você, como estão as coisas?";
-            }
-
-            // 5. RESPOSTA PADRÃO (SIMULANDO PENSAMENTO)
-            const respostasPadrao = [
-                "Essa é uma questão interessante. Do ponto de vista técnico, poderíamos analisar de várias formas. Quer que eu aprofunde?",
-                "Entendido. Estou processando essa informação na minha base de dados. Como você gostaria que eu prosseguisse?",
-                "Interessante! Eu posso te ajudar a desenvolver mais essa ideia. O que você tem em mente especificamente?",
-                "Processando... Minha análise sugere que estamos no caminho certo. O que mais você deseja saber?"
-            ];
-
-            return respostasPadrao[Math.floor(Math.random() * respostasPadrao.length)];
-        }
-    </script>
-</body>
+</script></body>
 </html>
