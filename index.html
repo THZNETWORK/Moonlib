@@ -3,145 +3,115 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ONYX v2.0 | THZ NETWORK Official</title>
+    <title>ONYX CHAT AI | DOWNLOAD</title>
     <style>
-        /* Fundo Estrelado/Espacial Roxo */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body {
-            margin: 0;
-            padding: 40px 20px;
-            background: radial-gradient(circle at center, #1a0b2e 0%, #050505 100%);
-            background-attachment: fixed;
-            color: #eeeeee;
-            font-family: 'Inter', 'Segoe UI', sans-serif;
+            background-color: #050505;
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
-            min-height: 100vh;
+            padding: 50px 20px;
         }
 
-        /* Efeito de estrelas sutil no fundo */
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-image: 
-                radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px),
-                radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 30px);
-            background-size: 550px 550px, 350px 350px;
-            background-position: 0 0, 40px 60px;
-            opacity: 0.3;
-            z-index: -1;
-        }
-
-        /* Card de Download Superior */
-        .download-box {
-            background: rgba(15, 15, 15, 0.9);
-            border: 2px solid #8a2be2;
-            border-radius: 20px;
-            padding: 40px;
-            max-width: 450px;
+        /* Quadrado de Download Principal */
+        .download-card {
+            background: #0d0d0d;
+            border: 1px solid #1a1a1a;
+            border-radius: 15px;
+            padding: 40px 20px;
             width: 100%;
+            max-width: 400px;
             text-align: center;
-            box-shadow: 0 0 40px rgba(138, 43, 226, 0.4);
-            margin-bottom: 50px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            margin-bottom: 40px;
         }
 
         h1 {
             color: #8a2be2;
-            font-size: 2.8rem;
-            margin-bottom: 20px;
-            letter-spacing: 5px;
+            font-size: 2.2rem;
+            margin-bottom: 25px;
+            letter-spacing: 2px;
             text-transform: uppercase;
-            text-shadow: 0 0 15px rgba(138, 43, 226, 0.6);
         }
 
-        /* Botão de Download */
         .btn-download {
-            display: inline-block;
-            background: linear-gradient(45deg, #8a2be2, #4b0082);
+            display: block;
+            background: #8a2be2;
             color: white;
-            padding: 20px 45px;
-            border-radius: 50px;
             text-decoration: none;
+            padding: 20px;
+            border-radius: 10px;
             font-weight: bold;
-            font-size: 1.3rem;
-            transition: 0.4s;
-            box-shadow: 0 5px 20px rgba(138, 43, 226, 0.5);
-            border: none;
-            cursor: pointer;
+            font-size: 1.2rem;
+            transition: 0.3s;
+            box-shadow: 0 5px 15px rgba(138, 43, 226, 0.4);
+            text-transform: uppercase;
         }
 
         .btn-download:hover {
-            transform: scale(1.08);
-            box-shadow: 0 0 30px rgba(138, 43, 226, 0.8);
-            filter: brightness(1.2);
+            background: #a020f0;
+            transform: scale(1.03);
         }
 
         /* Descrição FORA do quadrado */
-        .description-content {
-            max-width: 750px;
+        .description-box {
             width: 100%;
+            max-width: 400px;
             text-align: left;
-            background: rgba(0, 0, 0, 0.4);
-            padding: 30px;
-            border-radius: 15px;
-            border-left: 5px solid #8a2be2;
         }
 
-        .description-content h2 {
+        .description-box h2 {
             color: #8a2be2;
-            margin-bottom: 20px;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            border-left: 3px solid #8a2be2;
+            padding-left: 10px;
         }
 
-        .description-content p {
-            font-size: 1.15rem;
-            line-height: 1.8;
-            color: #ccc;
+        .description-box p {
+            color: #888;
+            line-height: 1.6;
+            font-size: 1.05rem;
             margin-bottom: 15px;
         }
 
-        .highlight {
-            color: #fff;
-            font-weight: bold;
-        }
-
         .footer {
-            margin-top: 60px;
-            font-size: 0.8rem;
-            color: #444;
-            letter-spacing: 2px;
+            margin-top: 40px;
+            font-size: 0.7rem;
+            color: #333;
+            letter-spacing: 1px;
         }
     </style>
 </head>
 <body>
 
-    <div class="download-box">
-        <h1>ONYX v2.0</h1>
-        <a href="https://github.com/THZNETWORK/Moonlib/releases" class="btn-download">
-            DOWNLOAD APK (7.53 MB)
+    <div class="download-card">
+        <h1>ONYX CHAT AI</h1>
+        <a href="https://github.com/THZNETWORK/Moonlib/releases/download/ONYX/onyx.chat.apk" class="btn-download">
+            BAIXAR APK (7.5 MB)
         </a>
     </div>
 
-    <div class="description-content">
-        <h2>Inteligência Artificial Universal</h2>
+    <div class="description-box">
+        <h2>Descrição da IA</h2>
         <p>
-            A <span class="highlight">ONYX v2.0</span> é o ápice do desenvolvimento da THZ NETWORK. Uma IA multimodal projetada para ser a sua assistente definitiva em qualquer tarefa.
+            A <b>ONYX v2.0</b> é o sistema central da THZ NETWORK, projetado para ser uma ferramenta universal e multimodal.
         </p>
         <p>
-            Diferente de sistemas comuns, a ONYX processa <span class="highlight">textos, códigos e arquivos visuais</span> em tempo real, oferecendo soluções precisas e instantâneas para automação, análise de dados e suporte técnico avançado.
+            Diferente de IAs comuns, a ONYX foi otimizada para entregar performance máxima com o menor consumo de hardware possível.
         </p>
         <p>
-            Com um núcleo ultra-leve de apenas <span class="highlight">7.53 MB</span>, ela garante performance máxima sem comprometer os recursos do seu dispositivo. Tudo o que você precisa em uma única interface inteligente.
-        </p>
-        <p style="font-style: italic; color: #666; margin-top: 20px;">
-            "Evolução contínua. I Always Come Back."
+            Capaz de processar arquivos, códigos e solicitações complexas em tempo real. Uma inteligência que evolui com você.
         </p>
     </div>
 
     <div class="footer">
-        THZ NETWORK // 2026 OFFICIAL DEPLOY
+        THZ NETWORK © 2026 | I ALWAYS COME BACK.
     </div>
 
 </body>
