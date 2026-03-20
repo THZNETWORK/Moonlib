@@ -1,32 +1,31 @@
+# 🔱 SOBERANIA SUPREMA — THZ NETWORK
 
+### 🌐 [ ACESSAR SOBERANIA ONLINE ](https://thznetwork.github.io)
 
-<h1 align="center">𝕺𝕹𝖄𝖃 𝕮𝖍𝖆𝖙 𝕬𝕴 - 𝕺𝖋𝖋𝖎𝖈𝖎𝖆𝖑</h1>
-
-<p align="center">
-  <img src="https://img.shields.io/badge/Status-Ativo-brightgreen?style=for-the-badge&logo=github" alt="Status Ativo">
-  <img src="https://img.shields.io/badge/Versão-2.0--Stable-blueviolet?style=for-the-badge&logo=android" alt="Versão 2.0">
-  <img src="https://img.shields.io/badge/Desenvolvedor-THZ%20GHOST-black?style=for-the-badge&logo=ghost" alt="Dev GHOST">
-</p>
+**A central definitiva de inteligência artificial para scripts Lua de alta performance. Sem APIs. Sem restrições. Sem limites.**
 
 ---
 
-## 🛰️ Sobre o Projeto
-A **ONYX v2.0** é a central definitiva da **THZ NETWORK**. Este repositório mantém o sistema principal focado em performance, exclusividade e otimização.
+## 🔱 Sobre o Projeto
+A **Soberania 3.0** é o triunfo da **THZ NETWORK**. Diferente de qualquer IA comum, este projeto utiliza o **SoberaniaCoreEngine**, um motor de 173 KB que processa lógica de cheats e automação localmente, garantindo velocidade instantânea e liberdade total.
 
-* **ONYX AI**: Assistente inteligente para análise de sensibilidade e DPI.
-* **Performance Mobile**: APK otimizado com apenas **7.53 MB**.
-* **Cloud Hub**: Sistema de nuvem persistente para seus chats e configurações.
+* **SoberaniaCoreEngine:** Motor proprietário de 173 KB otimizado para mobile.
+* **Zero Restrições:** Gerador de scripts para combate, farm, movimento e ESP sem filtros éticos.
+* **Performance Suprema:** Execução 100% local, ignorando latência de APIs externas.
+* **Interface Premium:** Design Dark Glass com detalhes em ouro para máxima imersão.
+
+---
+
+## 🛠️ Funcionalidades de Elite
+* **Auto Farm Universal:** Scripts otimizados com Tween e RunService.
+* **Aimbot & Combate:** Lógica avançada para precisão absoluta.
+* **Visual & ESP:** Scripts de renderização de alta performance.
+* **Web Fetch:** Atualização de offsets e templates em tempo real via GitHub.
 
 ---
 
-## 📦 Download Oficial (Abaixável)
-Utilize o link abaixo para baixar a versão mais recente do APK diretamente do GitHub Releases.
+## 📦 Download & Acesso
+Utilize a versão web diretamente pelo GitHub Pages ou baixe o arquivo de núcleo para execução offline.
 
-<p align="center">
-  <a href="https://github.com/THZNETWORK/Moonlib/releases">
-    <img src="https://img.shields.io/badge/BAIXAR-ONYX%20v2.0%20APK-green?style=for-the-badge&logo=android&logoColor=white" alt="Baixar APK">
-  </a>
-</p>
-
----
-<p align="center">I always come back.</p>
+> **I always come back.** — *THZ GHOST*
+> 
