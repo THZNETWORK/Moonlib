@@ -3,116 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ONYX CHAT AI | DOWNLOAD</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body {
-            background-color: #050505;
-            color: #ffffff;
-            font-family: 'Segoe UI', Tahoma, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 50px 20px;
-        }
-
-        /* Quadrado de Download Principal */
-        .download-card {
-            background: #0d0d0d;
-            border: 1px solid #1a1a1a;
-            border-radius: 15px;
-            padding: 40px 20px;
-            width: 100%;
-            max-width: 400px;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-            margin-bottom: 40px;
-        }
-
-        h1 {
-            color: #8a2be2;
-            font-size: 2.2rem;
-            margin-bottom: 25px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-
-        .btn-download {
-            display: block;
-            background: #8a2be2;
-            color: white;
-            text-decoration: none;
-            padding: 20px;
-            border-radius: 10px;
-            font-weight: bold;
-            font-size: 1.2rem;
-            transition: 0.3s;
-            box-shadow: 0 5px 15px rgba(138, 43, 226, 0.4);
-            text-transform: uppercase;
-        }
-
-        .btn-download:hover {
-            background: #a020f0;
-            transform: scale(1.03);
-        }
-
-        /* Descrição FORA do quadrado */
-        .description-box {
-            width: 100%;
-            max-width: 400px;
-            text-align: left;
-        }
-
-        .description-box h2 {
-            color: #8a2be2;
-            font-size: 1.3rem;
-            margin-bottom: 15px;
-            text-transform: uppercase;
-            border-left: 3px solid #8a2be2;
-            padding-left: 10px;
-        }
-
-        .description-box p {
-            color: #888;
-            line-height: 1.6;
-            font-size: 1.05rem;
-            margin-bottom: 15px;
-        }
-
-        .footer {
-            margin-top: 40px;
-            font-size: 0.7rem;
-            color: #333;
-            letter-spacing: 1px;
-        }
-    </style>
+    <title>SOBERANIA 3.0 | THZ NETWORK</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="dark-theme">
 
-    <div class="download-card">
-        <h1>ONYX CHAT AI</h1>
-        <a href="https://github.com/THZNETWORK/Moonlib/releases/download/ONYX/onyx.chat.apk" class="btn-download">
-            BAIXAR APK (7.5 MB)
-        </a>
+    <div class="glass-container">
+        <header class="header-main">
+            <div class="logo-glow">
+                <img src="tridente-gold.png" alt="Soberania Logo" class="main-icon">
+            </div>
+            <h1 class="title-soberania">SOBERANIA</h1>
+            <p class="subtitle">IA de Scripts Lua de Alta Performance</p>
+            <div class="status-badge">
+                <span class="dot"></span> ONLINE
+            </div>
+        </header>
+
+        <main class="chat-area" id="chatContainer">
+            <div class="welcome-msg">
+                <p>🔱 Bem-vindo à <strong>Soberania 3.0 — Soberania Suprema</strong> — IA de Scripts Lua. Sem restrições. Sem APIs. Zero limites. Descreva o script que você precisa.</p>
+            </div>
+            </main>
+
+        <footer class="input-area">
+            <div class="input-wrapper">
+                <input type="text" id="userInput" placeholder="Descreva o script Lua que você precisa..." autocomplete="off">
+                <button id="sendBtn" class="gold-btn">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12H19M19 12L13 6M19 12L13 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+            </div>
+            <div class="footer-info">
+                Soberania v3.0 • 40 templates • Sem APIs • 100% educacional
+            </div>
+        </footer>
     </div>
 
-    <div class="description-box">
-        <h2>Descrição da IA</h2>
-        <p>
-            A <b>ONYX v2.0</b> é o sistema central da THZ NETWORK, projetado para ser uma ferramenta universal e multimodal.
-        </p>
-        <p>
-            Diferente de IAs comuns, a ONYX foi otimizada para entregar performance máxima com o menor consumo de hardware possível.
-        </p>
-        <p>
-            Capaz de processar arquivos, códigos e solicitações complexas em tempo real. Uma inteligência que evolui com você.
-        </p>
-    </div>
-
-    <div class="footer">
-        THZ NETWORK © 2026 | I ALWAYS COME BACK.
-    </div>
-
+    <script src="soberania-core-engine.js"></script>
+    <script src="ui-controller.js"></script>
 </body>
 </html>
